@@ -108,8 +108,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <span>Category</span>
                         </a>
                         <ul class="sub">
-                            <li><a href="typography.html">All Category</a></li>
-                            <li><a href="glyphicon.html">Add Category</a></li>
+                            <li><a href="{{URL::to('/admin/category/all')}}">All Category</a></li>
+                            <li><a href="{{URL::to('/admin/category/add')}}">Add Category</a></li>
                         </ul>
                     </li>
                 </ul>

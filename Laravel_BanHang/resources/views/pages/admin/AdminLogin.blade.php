@@ -57,7 +57,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="{{asset('admin/js/jquery.slimscroll.js')}}"></script>
 <script src="{{asset('admin/js/jquery.nicescroll.js')}}"></script>
 <!--[if lte IE 8]>
-<script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
-<script src="js/jquery.scrollTo.js"></script>
+<script language="javascript" type="text/javascript" src="{{asset('admin/js/flot-chart/excanvas.min.js')}}"></script><![endif]-->
+<script src="{{asset('admin/js/jquery.scrollTo.js')}}"></script>
 </body>
 </html>
