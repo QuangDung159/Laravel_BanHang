@@ -89,8 +89,11 @@
                                 </span>
                             </td>
                             <td>
-                                <a href="" class="active" ui-toggle-class="">
+                                <a href="{{URL::to('/admin/category/edit/' . $category->id)}}" class="active"
+                                   ui-toggle-class="">
                                     <i class="fa fa-pencil text-success text-active"></i>
+                                </a>
+                                <a href="" class="active">
                                     <i class="fa fa-times text-danger text"></i>
                                 </a>
                             </td>
