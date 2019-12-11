@@ -44,7 +44,7 @@ class CategoryController extends Controller
             Session::put('msg_add_success', 'Add success');
             return Redirect::to(self::URL_TO_CATEGORY . '/all');
         } else {
-
+            return view('pages.admin.NotFound');
         }
     }
 
@@ -71,10 +71,10 @@ class CategoryController extends Controller
                 return view(self::PATH_TO_CATEGORY . 'EditCategory')
                     ->with('category', $data);
             } else {
-
+                return view('pages.admin.NotFound');
             }
         } else {
-
+            return view('pages.admin.NotFound');
         }
     }
 
@@ -95,7 +95,7 @@ class CategoryController extends Controller
             }
             return Redirect::to(self::URL_TO_CATEGORY . '/all');
         } else {
-
+            return view('pages.admin.NotFound');
         }
     }
 
@@ -110,7 +110,7 @@ class CategoryController extends Controller
             }
             return Redirect::to(self::URL_TO_CATEGORY . '/all');
         } else {
-
+            return view('pages.admin.NotFound');
         }
     }
 }
