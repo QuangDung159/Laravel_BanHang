@@ -10,7 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// Client site
 Route::get('/', 'HomeController@index');
 
 Route::get('/home', 'HomeController@index');
+
+// Admin site
+Route::get('/admin', 'AdminController@index');

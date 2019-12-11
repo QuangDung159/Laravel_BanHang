@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('Layout')
 @section('content')
 <div class="wrapper">
     <div class="features_items">
