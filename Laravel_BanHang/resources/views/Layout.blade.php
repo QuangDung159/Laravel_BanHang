@@ -9,13 +9,13 @@
 	<title>Home | E-Shopper</title>
 
 	<!-- asset stand for /public/ -->
-	<link href="{{asset('/front/css/bootstrap.min.css')}}" rel="stylesheet">
-	<link href="{{asset('/front/css/font-awesome.min.css')}}" rel="stylesheet">
-	<link href="{{asset('/front/css/prettyPhoto.css')}}" rel="stylesheet">
-	<link href="{{asset('/front/css/price-range.css')}}" rel="stylesheet">
-	<link href="{{asset('/front/css/animate.css')}}" rel="stylesheet">
-	<link href="{{asset('/front/css/main.css')}}" rel="stylesheet">
-	<link href="{{asset('/front/css/responsive.css')}}" rel="stylesheet">
+	<link href="{{asset('/client/css/bootstrap.min.css')}}" rel="stylesheet">
+	<link href="{{asset('/client/css/font-awesome.min.css')}}" rel="stylesheet">
+	<link href="{{asset('/client/css/prettyPhoto.css')}}" rel="stylesheet">
+	<link href="{{asset('/client/css/price-range.css')}}" rel="stylesheet">
+	<link href="{{asset('/client/css/animate.css')}}" rel="stylesheet">
+	<link href="{{asset('/client/css/main.css')}}" rel="stylesheet">
+	<link href="{{asset('/client/css/responsive.css')}}" rel="stylesheet">
 
 	<!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
@@ -66,7 +66,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<a href="index.html"><img src="{{asset('front/images/logo.png')}}" alt="" /></a>
+							<a href="index.html"><img src="{{asset('client/images/logo.png')}}" alt="" /></a>
 						</div>
 						<div class="btn-group pull-right">
 							<div class="btn-group">
@@ -177,8 +177,8 @@
 									<button type="button" class="btn btn-default get">Get it now</button>
 								</div>
 								<div class="col-sm-6">
-									<img src="{{asset('front/images/girl1.jpg')}}" class="girl img-responsive" alt="" />
-									<img src="{{asset('front/images/pricing.png')}} class=" pricing" alt="" />
+									<img src="{{asset('client/images/girl1.jpg')}}" class="girl img-responsive" alt="" />
+									<img src="{{asset('client/images/pricing.png')}} class=" pricing" alt="" />
 								</div>
 							</div>
 							<div class="item">
@@ -189,8 +189,8 @@
 									<button type="button" class="btn btn-default get">Get it now</button>
 								</div>
 								<div class="col-sm-6">
-									<img src="{{asset('front/images/girl2.jpg')}}" class="girl img-responsive" alt="" />
-									<img src="{{asset('front/images/pricing.png')}}" class="pricing" alt="" />
+									<img src="{{asset('client/images/girl2.jpg')}}" class="girl img-responsive" alt="" />
+									<img src="{{asset('client/images/pricing.png')}}" class="pricing" alt="" />
 								</div>
 							</div>
 
@@ -202,8 +202,8 @@
 									<button type="button" class="btn btn-default get">Get it now</button>
 								</div>
 								<div class="col-sm-6">
-									<img src="{{asset('front/images/girl3.jpg')}}" class="girl img-responsive" alt="" />
-									<img src="{{asset('front/images/pricing.png')}}" class="pricing" alt="" />
+									<img src="{{asset('client/images/girl3.jpg')}}" class="girl img-responsive" alt="" />
+									<img src="{{asset('client/images/pricing.png')}}" class="pricing" alt="" />
 								</div>
 							</div>
 
@@ -367,7 +367,7 @@
 
 						<div class="shipping text-center">
 							<!--shipping-->
-							<img src="{{asset('front/images/shipping.jpg')}}" alt="" />
+							<img src="{{asset('client/images/shipping.jpg')}}" alt="" />
 						</div>
 						<!--/shipping-->
 
@@ -397,7 +397,7 @@
 							<div class="video-gallery text-center">
 								<a href="#">
 									<div class="iframe-img">
-										<img src="{{asset('front/images/iframe1.png')}}" alt="" />
+										<img src="{{asset('client/images/iframe1.png')}}" alt="" />
 									</div>
 									<div class="overlay-icon">
 										<i class="fa fa-play-circle-o"></i>
@@ -412,7 +412,7 @@
 							<div class="video-gallery text-center">
 								<a href="#">
 									<div class="iframe-img">
-										<img src="{{asset('front/images/iframe2.png')}}" alt="" />
+										<img src="{{asset('client/images/iframe2.png')}}" alt="" />
 									</div>
 									<div class="overlay-icon">
 										<i class="fa fa-play-circle-o"></i>
@@ -427,7 +427,7 @@
 							<div class="video-gallery text-center">
 								<a href="#">
 									<div class="iframe-img">
-										<img src="{{asset('front/images/iframe3.png')}}" alt="" />
+										<img src="{{asset('client/images/iframe3.png')}}" alt="" />
 									</div>
 									<div class="overlay-icon">
 										<i class="fa fa-play-circle-o"></i>
@@ -442,7 +442,7 @@
 							<div class="video-gallery text-center">
 								<a href="#">
 									<div class="iframe-img">
-										<img src="{{asset('front/images/iframe4.png')}}" alt="" />
+										<img src="{{asset('client/images/iframe4.png')}}" alt="" />
 									</div>
 									<div class="overlay-icon">
 										<i class="fa fa-play-circle-o"></i>
@@ -455,7 +455,7 @@
 					</div>
 					<div class="col-sm-3">
 						<div class="address">
-							<img src="{{asset('front/images/map.png')}}" alt="" />
+							<img src="{{asset('client/images/map.png')}}" alt="" />
 							<p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
 						</div>
 					</div>
@@ -543,12 +543,12 @@
 
 
 
-	<script src="{{asset('front/js/jquery.js')}}"></script>
-	<script src="{{asset('front/js/bootstrap.min.js')}}"></script>
-	<script src="{{asset('front/js/jquery.scrollUp.min.js')}}"></script>
-	<script src="{{asset('front/js/price-range.js')}}"></script>
-	<script src="{{asset('front/js/jquery.prettyPhoto.js')}}"></script>
-	<script src="{{asset('front/js/main.js')}}"></script>
+	<script src="{{asset('client/js/jquery.js')}}"></script>
+	<script src="{{asset('client/js/bootstrap.min.js')}}"></script>
+	<script src="{{asset('client/js/jquery.scrollUp.min.js')}}"></script>
+	<script src="{{asset('client/js/price-range.js')}}"></script>
+	<script src="{{asset('client/js/jquery.prettyPhoto.js')}}"></script>
+	<script src="{{asset('client/js/main.js')}}"></script>
 </body>
 
 </html>

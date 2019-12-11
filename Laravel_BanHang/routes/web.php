@@ -16,4 +16,4 @@ Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 
 // Admin site
-Route::get('/admin', 'AdminController@index');
+Route::get('/admin/home', 'AdminController@index');
