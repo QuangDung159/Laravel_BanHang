@@ -3,10 +3,16 @@
     <?php
     if (Session::get('msg_add_success') != null) {
         echo
-            '<div class="alert alert-success">
-                <strong>Success!</strong>' . Session::get('msg_add_success') .
-            '</div>';
+            '<div class="alert alert-success"><strong>' . Session::get('msg_add_success') . '</strong></div>';
         Session::put('msg_add_success', null);
+    }
+    ?>
+
+    <?php
+    if (Session::get('msg_update_success') != null) {
+        echo
+            '<div class="alert alert-success"><strong>' . Session::get('msg_update_success') . '</strong></div>';
+        Session::put('msg_update_success', null);
     }
     ?>
     <div class="table-agile-info">
@@ -62,11 +68,11 @@
                             <td>
                                 <span class="text-ellipsis">
                                     @if($category->status == 1)
-                                        <a href="{{URL::to('/admin/category/changeStatus?id=')}}{{$category->id}}{{'&status=0'}}">
+                                        <a href="{{URL::to('/admin/category/changeStatus?id=' . $category->id)}}{{'&status=0'}}">
                                             <span class="label label-success">Active</span>
                                         </a>
                                     @else
-                                        <a href="{{URL::to('/admin/category/changeStatus?id=')}}{{$category->id}}{{'&status=1'}}">
+                                        <a href="{{URL::to('/admin/category/changeStatus?id=' . $category->id)}}{{'&status=1'}}">
                                             <span class="label label-danger">Inactive</span>
                                         </a>
                                     @endif
