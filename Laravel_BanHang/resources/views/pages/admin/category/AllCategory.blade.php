@@ -15,6 +15,14 @@
         Session::put('msg_update_success', null);
     }
     ?>
+
+    <?php
+    if (Session::get('msg_delete_success') != null) {
+        echo
+            '<div class="alert alert-success"><strong>' . Session::get('msg_delete_success') . '</strong></div>';
+        Session::put('msg_delete_success', null);
+    }
+    ?>
     <div class="table-agile-info">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -93,7 +101,7 @@
                                    ui-toggle-class="">
                                     <i class="fa fa-pencil text-success text-active"></i>
                                 </a>
-                                <a href="" class="active">
+                                <a href="{{URL::to('/admin/category/delete/' . $category->id)}}" class="active">
                                     <i class="fa fa-times text-danger text"></i>
                                 </a>
                             </td>

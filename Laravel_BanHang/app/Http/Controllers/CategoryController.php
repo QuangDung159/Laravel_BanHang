@@ -22,7 +22,9 @@ class CategoryController extends Controller
 
     public function doShowAllCategoryPage()
     {
-        $listCategory = DB::table('category')->get();
+        $listCategory = DB::table('category')
+            ->where('is_deleted', '=', 0)
+            ->get();
         return view(self::PATH_TO_CATEGORY . 'AllCategory')->with('listCategory', $listCategory);
     }
 
@@ -90,6 +92,21 @@ class CategoryController extends Controller
                 ->update($data);
             if ($result) {
                 Session::put('msg_update_success', 'Update success');
+            }
+            return Redirect::to(self::URL_TO_CATEGORY . '/all');
+        } else {
+
+        }
+    }
+
+    public function deleteCategory($id)
+    {
+        if ($id) {
+            $result = DB::table('category')
+                ->where('id', '=', $id)
+                ->update(['is_deleted' => 1, 'updated_at' => time()]);
+            if ($result) {
+                Session::put('msg_delete_success', 'Delete success');
             }
             return Redirect::to(self::URL_TO_CATEGORY . '/all');
         } else {
