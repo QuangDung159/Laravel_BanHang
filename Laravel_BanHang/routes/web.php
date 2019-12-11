@@ -32,5 +32,8 @@ Route::group(['prefix' => '/admin'], function () {
         Route::get('/all', CATEGORY_CONTROLLER . 'doShowAllCategoryPage');
         Route::post('/doAddCategory', CATEGORY_CONTROLLER . 'doAddCategory');
         Route::get('/changeStatus', CATEGORY_CONTROLLER . 'changeStatus');
+        Route::post('/doEditCategory/{id}', CATEGORY_CONTROLLER . 'doEditCategory');
+        Route::get('/edit/{id}', CATEGORY_CONTROLLER . 'showEditCategoryPage');
+        Route::get('/delete/{id}', CATEGORY_CONTROLLER . 'deleteCategory');
     });
 });
