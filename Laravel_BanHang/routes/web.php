@@ -19,3 +19,7 @@ Route::get('/home', 'HomeController@index');
 Route::get('/admin/home', 'AdminController@index');
 
 Route::get('/admin/dashboard', 'AdminController@showDashboard');
+
+Route::post('/doLoginAdmin', 'AdminController@doLoginAdmin');
+
+Route::get('/doLogoutAdmin', 'AdminController@doLogoutAdmin');
