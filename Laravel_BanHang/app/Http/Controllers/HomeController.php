@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    const PATH_TO_CLIENT_PAGES_DIRECTORY = "pages.client.";
+
     public function index()
     {
-        return view('pages.client.Home');
+        return view(self::PATH_TO_CLIENT_PAGES_DIRECTORY . 'Home');
     }
 }
