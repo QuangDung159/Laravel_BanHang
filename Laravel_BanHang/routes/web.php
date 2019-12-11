@@ -17,3 +17,5 @@ Route::get('/home', 'HomeController@index');
 
 // Admin site
 Route::get('/admin/home', 'AdminController@index');
+
+Route::get('/admin/dashboard', 'AdminController@showDashboard');
