@@ -88,6 +88,9 @@
       <path value="$PROJECT_DIR$/Laravel_BanHang/vendor/sebastian/code-unit-reverse-lookup" />
       <path value="$PROJECT_DIR$/Laravel_BanHang/vendor/sebastian/type" />
       <path value="$PROJECT_DIR$/Laravel_BanHang/vendor/nesbot/carbon" />
+      <path value="$PROJECT_DIR$/Laravel_BanHang/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/Laravel_BanHang/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/Laravel_BanHang/vendor/doctrine/dbal" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
