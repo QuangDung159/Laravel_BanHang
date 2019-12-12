@@ -88,12 +88,12 @@
                             </td>
                             <td>
                                 <span class="text-ellipsis">
-                                    {{$brand->created_at}}
+                                    {{date('Y/m/d H:i:s', $brand->created_at)}}
                                 </span>
                             </td>
                             <td>
                                 <span class="text-ellipsis">
-                                    {{$brand->updated_at}}
+                                    {{date('Y/m/d H:i:s', $brand->updated_at)}}
                                 </span>
                             </td>
                             <td>

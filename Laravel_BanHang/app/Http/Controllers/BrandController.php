@@ -25,6 +25,7 @@ class BrandController extends Controller
         $listBrand = DB::table(self::TABLE_NAME)
             ->where('is_deleted', '=', 0)
             ->get();
+        //echo date('m/d/Y', $listBrand[0]->created_at);die;
         return view(self::PATH . 'All')->with('listBrand', $listBrand);
     }
 
