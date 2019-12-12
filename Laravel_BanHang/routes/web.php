@@ -26,10 +26,10 @@ Route::get('/doLogoutAdmin', 'AdminController@doLogoutAdmin');
 Route::group(['prefix' => '/admin'], function () {
     // admin
     Route::get('/home', 'AdminController@index');
-    Route::get('/dashboard', 'AdminController@showDashboard');
+    Route::get('/dashboard', 'AdminController@showDashboard')->middleware('check.login');
 
     // category
-    Route::group(['prefix' => '/category'], function () {
+    Route::group(['prefix' => '/category', 'middleware' => 'check.login'], function () {
         Route::get('/add', CATEGORY_CONTROLLER . 'doShowAddCategoryPage');
         Route::get('/all', CATEGORY_CONTROLLER . 'doShowAllCategoryPage');
         Route::post('/doAddCategory', CATEGORY_CONTROLLER . 'doAddCategory');
@@ -40,7 +40,7 @@ Route::group(['prefix' => '/admin'], function () {
     });
 
     // brand
-    Route::group(['prefix' => '/brand'], function () {
+    Route::group(['prefix' => '/brand', 'middleware' => 'check.login'], function () {
         Route::get('/add', BRAND_CONTROLLER . 'doShowAddPage');
         Route::get('/all', BRAND_CONTROLLER . 'doShowAllPage');
         Route::post('/doAdd', BRAND_CONTROLLER . 'doAdd');
@@ -51,7 +51,7 @@ Route::group(['prefix' => '/admin'], function () {
     });
 
     // product
-    Route::group(['prefix' => '/product'], function () {
+    Route::group(['prefix' => '/product', 'middleware' => 'check.login'], function () {
         Route::get('/add', PRODUCT_CONTROLLER . 'doShowAddPage');
         Route::get('/all', PRODUCT_CONTROLLER . 'doShowAllPage');
         Route::post('/doAdd', PRODUCT_CONTROLLER . 'doAdd');
