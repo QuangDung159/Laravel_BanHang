@@ -61,13 +61,18 @@
                         <th>Name</th>
                         <th>Code</th>
                         <th>Status</th>
+                        <th>Brand</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Rate</th>
+                        <th>Image</th>
                         <th nowrap="true">Created At</th>
                         <th nowrap="true">Updated At</th>
                         <th style="width:30px;"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($listBrand as $key => $brand)
+                    @foreach($listProduct as $key => $product)
                         <tr>
                             <td><label class="i-checks m-b-none"><input type="checkbox"
                                                                         name="post[]"><i></i></label></td>
@@ -86,6 +91,11 @@
                                     @endif
                                 </span>
                             </td>
+                            <td><span class="text-ellipsis">{{$product->brand_name}}</span></td>
+                            <td><span class="text-ellipsis">{{$product->category_name}}</span></td>
+                            <td><span class="text-ellipsis">{{$product->price}}</span></td>
+                            <td><span class="text-ellipsis">{{$product->rate}}</span></td>
+                            <td><span class="text-ellipsis">{{$product->image}}</span></td>
                             <td>
                                 <span class="text-ellipsis">
                                     {{date('Y/m/d H:i:s', $product->created_at)}}

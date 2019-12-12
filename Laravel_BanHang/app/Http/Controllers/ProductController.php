@@ -34,8 +34,26 @@ class ProductController extends Controller
     public function doShowAllPage()
     {
         $listProduct = DB::table(self::TABLE_NAME)
-            ->where('is_deleted', '=', 0)
-            ->get();
+            ->join('category', self::TABLE_NAME . '.category_id', '=', 'category.id')
+            ->join('brand', self::TABLE_NAME . '.brand_id', '=', 'brand.id')
+            ->where(self::TABLE_NAME . '.is_deleted', '=', 0)
+            ->where('category.is_deleted', '=', 0)
+            ->where('brand.is_deleted', '=', 0)
+            ->get(
+                [
+                    self::TABLE_NAME . '.name',
+                    self::TABLE_NAME . '.id',
+                    self::TABLE_NAME . '.code',
+                    self::TABLE_NAME . '.status',
+                    self::TABLE_NAME . '.price',
+                    self::TABLE_NAME . '.rate',
+                    self::TABLE_NAME . '.image',
+                    self::TABLE_NAME . '.created_at',
+                    self::TABLE_NAME . '.updated_at',
+                    'category.name as category_name',
+                    'brand.name as brand_name'
+                ]
+            );
         return view(self::PATH . 'All')->with('listProduct', $listProduct);
     }
 
@@ -91,7 +109,7 @@ class ProductController extends Controller
                 ->first();
             if ($data) {
                 return view(self::PATH . 'Edit')
-                    ->with('brand', $data);
+                    ->with('product', $data);
             } else {
                 return view('pages.admin.NotFound');
             }

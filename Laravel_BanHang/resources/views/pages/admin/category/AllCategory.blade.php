@@ -23,6 +23,14 @@
         Session::put('msg_delete_success', null);
     }
     ?>
+
+    <?php
+    if (Session::get('msg_delete_fail') != null) {
+        echo
+            '<div class="alert alert-danger"><strong>' . Session::get('msg_delete_fail') . '</strong></div>';
+        Session::put('msg_delete_fail', null);
+    }
+    ?>
     <div class="table-agile-info">
         <div class="panel panel-default">
             <div class="panel-heading">
