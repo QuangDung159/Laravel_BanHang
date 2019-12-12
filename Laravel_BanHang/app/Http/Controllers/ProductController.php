@@ -17,7 +17,17 @@ class ProductController extends Controller
 
     public function doShowAddPage()
     {
-        return view(self::PATH . 'Add');
+        $listBrand = DB::table('brand')
+            ->where('is_deleted', '=', 0)
+            ->where('status', '=', 1)->get();
+
+        $listCategory = DB::table('category')
+            ->where('is_deleted', '=', 0)
+            ->where('status', '=', 1)->get();
+
+        return view(self::PATH . 'Add')
+            ->with('listBrand', $listBrand)
+            ->with('listCategory', $listCategory);
     }
 
     public function doShowAllPage()
@@ -35,8 +45,18 @@ class ProductController extends Controller
         $data['name'] = $req->name;
         $data['code'] = $req->code;
         $data['status'] = $req->status;
+        $data['category_id'] = $req->category_id;
+        $data['brand_id'] = $req->brand_id;
+        $data['content'] = $req->content;
+        $data['description'] = $req->description;
+        $data['price'] = $req->price;
         $data['created_at'] = time();
         $data['updated_at'] = time();
+
+        $image = file('image');
+        if ($image) {
+
+        }
 
         if (count($data) != 0) {
             DB::table(self::TABLE_NAME)->insert($data);
