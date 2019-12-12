@@ -18,6 +18,7 @@ class CategoryController extends Controller
     const PATH_TO_CLIENT = 'pages.client.';
     const URL_TO_CLIENT_CATEGORY = '/category';
 
+    // admin
     public function doShowAddCategoryPage()
     {
         return view(self::PATH_TO_CATEGORY . 'AddCategory');
@@ -137,6 +138,7 @@ class CategoryController extends Controller
         }
     }
 
+    // client
     public function showProductByCategory($id)
     {
         if ($id) {
@@ -154,6 +156,10 @@ class CategoryController extends Controller
                         self::TABLE_NAME . '.name'
                     ]
                 )->first();
+
+            if (!$category) {
+                return view('pages.client.NotFound');
+            }
 
             $listCategory = DB::table('category')
                 ->where('is_deleted', '=', 0)
@@ -179,7 +185,7 @@ class CategoryController extends Controller
                 ->with('listCategory', $listCategory)
                 ->with('listBrand', $listBrand);
         } else {
-
+            return view('pages.client.NotFound');
         }
     }
 }

@@ -16,6 +16,7 @@ class BrandController extends Controller
     const TABLE_NAME = 'brand';
     const PATH_TO_CLIENT = 'pages.client.';
 
+    // admin
     public function doShowAddPage()
     {
         return view(self::PATH . 'Add');
@@ -133,6 +134,7 @@ class BrandController extends Controller
         }
     }
 
+    // client
     public function showProductByBrand($id)
     {
         if ($id) {
@@ -150,6 +152,10 @@ class BrandController extends Controller
                         self::TABLE_NAME . '.name'
                     ]
                 )->first();
+
+            if (!$brand) {
+                return view('pages.client.NotFound');
+            }
 
             $listCategory = DB::table('category')
                 ->where('is_deleted', '=', 0)
@@ -175,7 +181,7 @@ class BrandController extends Controller
                 ->with('listCategory', $listCategory)
                 ->with('listBrand', $listBrand);
         } else {
-
+            return view('pages.client.NotFound');
         }
     }
 }
