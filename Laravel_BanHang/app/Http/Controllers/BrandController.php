@@ -14,6 +14,7 @@ class BrandController extends Controller
     const PATH = 'pages.admin.brand.';
     const URL = '/admin/brand';
     const TABLE_NAME = 'brand';
+    const PATH_TO_CLIENT = 'pages.client.';
 
     public function doShowAddPage()
     {
@@ -129,6 +130,52 @@ class BrandController extends Controller
             return Redirect::to(self::URL . '/all');
         } else {
             return view('pages.admin.NotFound');
+        }
+    }
+
+    public function showProductByBrand($id)
+    {
+        if ($id) {
+            $listProduct = DB::table('product')
+                ->where('product.is_deleted', '=', 0)
+                ->where('product.status', '=', 1)
+                ->where('product.brand_id', '=', $id)
+                ->get();
+
+            $brand = DB::table(self::TABLE_NAME)
+                ->where(self::TABLE_NAME . '.id', '=', $id)
+                ->get(
+                    [
+                        self::TABLE_NAME . '.id',
+                        self::TABLE_NAME . '.name'
+                    ]
+                )->first();
+
+            $listCategory = DB::table('category')
+                ->where('is_deleted', '=', 0)
+                ->where('status', '=', 1)->get();
+
+            $listBrand = DB::table('brand')
+                ->select(
+                    [
+                        'brand.id',
+                        'brand.name',
+                        DB::raw('COUNT(product.id) as number_product')
+                    ]
+                )
+                ->where('brand.is_deleted', '=', 0)
+                ->where('brand.status', '=', 1)
+                ->leftJoin('product', 'brand.id', '=', 'product.brand_id')
+                ->groupBy('brand.id', 'brand.name')
+                ->get();
+
+            return view(self::PATH_TO_CLIENT . 'ProductByBrand')
+                ->with('listProduct', $listProduct)
+                ->with('brand', $brand)
+                ->with('listCategory', $listCategory)
+                ->with('listBrand', $listBrand);
+        } else {
+
         }
     }
 }

@@ -15,6 +15,8 @@ class CategoryController extends Controller
     const PATH_TO_CATEGORY = 'pages.admin.category.';
     const URL_TO_CATEGORY = '/admin/category';
     const TABLE_NAME = 'category';
+    const PATH_TO_CLIENT = 'pages.client.';
+    const URL_TO_CLIENT_CATEGORY = '/category';
 
     public function doShowAddCategoryPage()
     {
@@ -132,6 +134,52 @@ class CategoryController extends Controller
             return Redirect::to(self::URL_TO_CATEGORY . '/all');
         } else {
             return view('pages.admin.NotFound');
+        }
+    }
+
+    public function showProductByCategory($id)
+    {
+        if ($id) {
+            $listProduct = DB::table('product')
+                ->where('product.is_deleted', '=', 0)
+                ->where('product.status', '=', 1)
+                ->where('product.category_id', '=', $id)
+                ->get();
+
+            $category = DB::table(self::TABLE_NAME)
+                ->where(self::TABLE_NAME . '.id', '=', $id)
+                ->get(
+                    [
+                        self::TABLE_NAME . '.id',
+                        self::TABLE_NAME . '.name'
+                    ]
+                )->first();
+
+            $listCategory = DB::table('category')
+                ->where('is_deleted', '=', 0)
+                ->where('status', '=', 1)->get();
+
+            $listBrand = DB::table('brand')
+                ->select(
+                    [
+                        'brand.id',
+                        'brand.name',
+                        DB::raw('COUNT(product.id) as number_product')
+                    ]
+                )
+                ->where('brand.is_deleted', '=', 0)
+                ->where('brand.status', '=', 1)
+                ->leftJoin('product', 'brand.id', '=', 'product.brand_id')
+                ->groupBy('brand.id', 'brand.name')
+                ->get();
+
+            return view(self::PATH_TO_CLIENT . 'ProductByCategory')
+                ->with('listProduct', $listProduct)
+                ->with('category', $category)
+                ->with('listCategory', $listCategory)
+                ->with('listBrand', $listBrand);
+        } else {
+
         }
     }
 }
