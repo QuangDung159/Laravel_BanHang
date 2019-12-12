@@ -14,6 +14,7 @@ class CategoryController extends Controller
 {
     const PATH_TO_CATEGORY = 'pages.admin.category.';
     const URL_TO_CATEGORY = '/admin/category';
+    const TABLE_NAME = 'category';
 
     public function doShowAddCategoryPage()
     {
@@ -56,6 +57,17 @@ class CategoryController extends Controller
         if ($id != null || $status != null) {
             DB::table('category')->where('id', '=', $id)
                 ->update($data);
+
+            $listProductByCategory = DB::table('product')
+                ->where(self::TABLE_NAME . '_id', '=', $id)
+                ->get();
+
+            foreach ($listProductByCategory as $product) {
+                DB::table('product')
+                    ->where('product.id', '=', $product->id)
+                    ->update(['product.status' => $status]);
+            }
+
             Session::put('msg_update_success', 'Update success');
         }
         return Redirect::to(self::URL_TO_CATEGORY . '/all');
@@ -102,6 +114,15 @@ class CategoryController extends Controller
     public function deleteCategory($id)
     {
         if ($id) {
+            $listProductByCategory = DB::table('product')
+                ->where(self::TABLE_NAME . '_id', '=', $id)
+                ->get();
+
+            if (count($listProductByCategory) != 0) {
+                Session::put('msg_delete_fail', 'Delete fail! There are a number of products in this category');
+                return Redirect::to(self::URL_TO_CATEGORY . '/all');
+            }
+
             $result = DB::table('category')
                 ->where('id', '=', $id)
                 ->update(['is_deleted' => 1, 'updated_at' => time()]);

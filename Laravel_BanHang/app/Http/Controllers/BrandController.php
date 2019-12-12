@@ -25,7 +25,6 @@ class BrandController extends Controller
         $listBrand = DB::table(self::TABLE_NAME)
             ->where('is_deleted', '=', 0)
             ->get();
-        //echo date('m/d/Y', $listBrand[0]->created_at);die;
         return view(self::PATH . 'All')->with('listBrand', $listBrand);
     }
 
@@ -56,6 +55,17 @@ class BrandController extends Controller
         if ($id != null || $status != null) {
             DB::table(self::TABLE_NAME)->where('id', '=', $id)
                 ->update($data);
+
+            $listProductByBrand = DB::table('product')
+                ->where(self::TABLE_NAME . '_id', '=', $id)
+                ->get();
+
+            foreach ($listProductByBrand as $product) {
+                DB::table('product')
+                    ->where('product.id', '=', $product->id)
+                    ->update(['product.status' => $status]);
+            }
+
             Session::put('msg_update_success', 'Update success');
         }
         return Redirect::to(self::URL . '/all');
@@ -101,6 +111,15 @@ class BrandController extends Controller
     public function doDelete($id)
     {
         if ($id) {
+            $listProductByBrand = DB::table('product')
+                ->where(self::TABLE_NAME . '_id', '=', $id)
+                ->get();
+
+            if (count($listProductByBrand) != 0) {
+                Session::put('msg_delete_fail', 'Delete fail! There are a number of products in this brand');
+                return Redirect::to(self::URL . '/all');
+            }
+
             $result = DB::table(self::TABLE_NAME)
                 ->where('id', '=', $id)
                 ->update(['is_deleted' => 1, 'updated_at' => time()]);

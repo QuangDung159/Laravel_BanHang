@@ -23,18 +23,10 @@
         Session::put('msg_delete_success', null);
     }
     ?>
-
-    <?php
-    if (Session::get('msg_delete_fail') != null) {
-        echo
-            '<div class="alert alert-danger"><strong>' . Session::get('msg_delete_fail') . '</strong></div>';
-        Session::put('msg_delete_fail', null);
-    }
-    ?>
     <div class="table-agile-info">
         <div class="panel panel-default">
             <div class="panel-heading">
-                BRAND
+                PRODUCT
             </div>
             <div class="row w3-res-tb">
                 <div class="col-sm-5 m-b-xs">
@@ -69,47 +61,61 @@
                         <th>Name</th>
                         <th>Code</th>
                         <th>Status</th>
+                        <th>Brand</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Rate</th>
+                        <th>Image</th>
                         <th nowrap="true">Created At</th>
                         <th nowrap="true">Updated At</th>
                         <th style="width:30px;"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($listBrand as $key => $brand)
+                    @foreach($listProduct as $key => $product)
                         <tr>
                             <td><label class="i-checks m-b-none"><input type="checkbox"
                                                                         name="post[]"><i></i></label></td>
-                            <td><span class="text-ellipsis">{{$brand->name}}</span></td>
-                            <td><span class="text-ellipsis">{{$brand->code}}</span></td>
+                            <td><span class="text-ellipsis">{{$product->name}}</span></td>
+                            <td><span class="text-ellipsis">{{$product->code}}</span></td>
                             <td>
                                 <span class="text-ellipsis">
-                                    @if($brand->status == 1)
-                                        <a href="{{URL::to('/admin/brand/changeStatus?id=' . $brand->id)}}{{'&status=0'}}">
+                                    @if($product->status == 1)
+                                        <a href="{{URL::to('/admin/product/changeStatus?id=' . $product->id)}}{{'&status=0'}}">
                                             <span class="label label-success">Active</span>
                                         </a>
                                     @else
-                                        <a href="{{URL::to('/admin/brand/changeStatus?id=' . $brand->id)}}{{'&status=1'}}">
+                                        <a href="{{URL::to('/admin/product/changeStatus?id=' . $product->id)}}{{'&status=1'}}">
                                             <span class="label label-danger">Inactive</span>
                                         </a>
                                     @endif
                                 </span>
                             </td>
+                            <td><span class="text-ellipsis">{{$product->brand_name}}</span></td>
+                            <td><span class="text-ellipsis">{{$product->category_name}}</span></td>
+                            <td><span class="text-ellipsis">{{$product->price}}</span></td>
+                            <td><span class="text-ellipsis">{{$product->rate}}</span></td>
                             <td>
                                 <span class="text-ellipsis">
-                                    {{date('Y/m/d H:i:s', $brand->created_at)}}
+                                    <img height="90" width="160" src="{{asset('upload/product/')}}/{{$product->image}}">
                                 </span>
                             </td>
                             <td>
                                 <span class="text-ellipsis">
-                                    {{date('Y/m/d H:i:s', $brand->updated_at)}}
+                                    {{date('Y/m/d H:i:s', $product->created_at)}}
                                 </span>
                             </td>
                             <td>
-                                <a href="{{URL::to('/admin/brand/edit/' . $brand->id)}}" class="active"
+                                <span class="text-ellipsis">
+                                    {{date('Y/m/d H:i:s', $product->updated_at)}}
+                                </span>
+                            </td>
+                            <td>
+                                <a href="{{URL::to('/admin/product/edit/' . $product->id)}}" class="active"
                                    ui-toggle-class="">
                                     <i class="fa fa-pencil text-success text-active"></i>
                                 </a>
-                                <a href="{{URL::to('/admin/brand/delete/' . $brand->id)}}"
+                                <a href="{{URL::to('/admin/product/delete/' . $product->id)}}"
                                    onclick="return confirm('Are you want to delete this?')" class="active">
                                     <i class="fa fa-times text-danger text"></i>
                                 </a>
