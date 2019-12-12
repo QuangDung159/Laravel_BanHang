@@ -19,6 +19,9 @@ const PRODUCT_CONTROLLER = 'ProductController@';
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 
+Route::get('/category/{id}', CATEGORY_CONTROLLER . 'showProductByCategory');
+Route::get('/brand/{id}', BRAND_CONTROLLER . 'showProductByBrand');
+
 // Admin site
 Route::post('/doLoginAdmin', 'AdminController@doLoginAdmin');
 Route::get('/doLogoutAdmin', 'AdminController@doLogoutAdmin');
