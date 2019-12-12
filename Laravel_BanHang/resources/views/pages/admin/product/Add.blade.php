@@ -39,8 +39,8 @@
                                   placeholder="Enter category description" style="resize: none;" rows="5"></textarea>
                     </div>
                     <div class="form-group ">
-                        <label for="content">Product content</label>
-                        <textarea class="form-control" id="content" name="content"
+                        <label for="content1">Product content</label>
+                        <textarea class="form-control" id="content1" name="content1"
                                   placeholder="Enter category content" style="resize: none;" rows="10"></textarea>
                     </div>
                     <div class="form-group">

@@ -66,7 +66,7 @@ class ProductController extends Controller
         $data['status'] = $req->status;
         $data['category_id'] = $req->category_id;
         $data['brand_id'] = $req->brand_id;
-        $data['content'] = $req->content;
+        $data['content'] = $req->content1;
         $data['description'] = $req->description;
         $data['price'] = $req->price;
         $data['created_at'] = time();
@@ -107,9 +107,20 @@ class ProductController extends Controller
             $data = DB::table(self::TABLE_NAME)
                 ->where('id', '=', $id)
                 ->first();
+
+            $listBrand = DB::table('brand')
+                ->where('is_deleted', '=', 0)
+                ->where('status', '=', 1)->get();
+
+            $listCategory = DB::table('category')
+                ->where('is_deleted', '=', 0)
+                ->where('status', '=', 1)->get();
+
             if ($data) {
                 return view(self::PATH . 'Edit')
-                    ->with('product', $data);
+                    ->with('product', $data)
+                    ->with('listBrand', $listBrand)
+                    ->with('listCategory', $listCategory);
             } else {
                 return view('pages.admin.NotFound');
             }
@@ -120,19 +131,35 @@ class ProductController extends Controller
 
     public function doEdit($id, Request $req)
     {
+        Session::put('mgs_add_success', null);
         if ($id) {
-            $data = [
-                'name' => $req->name,
-                'code' => $req->code,
-                'updated_at' => time()
-            ];
-            $result = DB::table(self::TABLE_NAME)
-                ->where('id', '=', $id)
-                ->update($data);
-            if ($result) {
-                Session::put('msg_update_success', 'Update success');
+            $data = array();
+            $data['name'] = $req->name;
+            $data['code'] = $req->code;
+            $data['category_id'] = $req->category_id;
+            $data['brand_id'] = $req->brand_id;
+            $data['content'] = $req->product_content;
+            $data['description'] = $req->description;
+            $data['price'] = $req->price;
+            $data['created_at'] = time();
+            $data['updated_at'] = time();
+
+            $image = $req->file('image');
+            if ($image) {
+                $newName = time() . '_' . rand(0, 9) . '_' . $req->name . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path() . self::PATH_TO_UPLOAD_PRODUCT, $newName);
+                $data['image'] = $newName;
             }
-            return Redirect::to(self::URL . '/all');
+
+            if (count($data) != 0) {
+                DB::table(self::TABLE_NAME)
+                    ->where(self::TABLE_NAME . '.id', '=', $id)
+                    ->update($data);
+                Session::put('msg_update_success', 'Update success');
+                return Redirect::to(self::URL . '/all');
+            } else {
+                return view('pages.admin.NotFound');
+            }
         } else {
             return view('pages.admin.NotFound');
         }
