@@ -95,7 +95,11 @@
                             <td><span class="text-ellipsis">{{$product->category_name}}</span></td>
                             <td><span class="text-ellipsis">{{$product->price}}</span></td>
                             <td><span class="text-ellipsis">{{$product->rate}}</span></td>
-                            <td><span class="text-ellipsis">{{$product->image}}</span></td>
+                            <td>
+                                <span class="text-ellipsis">
+                                    <img height="90" width="160" src="{{asset('upload/product/')}}/{{$product->image}}">
+                                </span>
+                            </td>
                             <td>
                                 <span class="text-ellipsis">
                                     {{date('Y/m/d H:i:s', $product->created_at)}}

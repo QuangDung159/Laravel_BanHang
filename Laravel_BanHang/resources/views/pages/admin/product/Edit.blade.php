@@ -12,17 +12,17 @@
                     <div class="form-group">
                         <label for="brand_id">Brand name</label>
                         <select class="form-control input-sm m-bot15" id="brand_id" name="brand_id">
-                            @foreach($listBrand as $key => $brand)
-                                <option value="{{$brand->id}}">{{$brand->name}}</option>
-                            @endforeach
+{{--                            @foreach($listBrand as $key => $brand)--}}
+{{--                                <option value="{{$brand->id}}">{{$brand->name}}</option>--}}
+{{--                            @endforeach--}}
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="category_id">Category name</label>
                         <select class="form-control input-sm m-bot15" id="category_id" name="category_id">
-                            @foreach($listCategory as $key => $category)
-                                <option value="{{$category->id}}">{{$category->name}}</option>
-                            @endforeach
+{{--                            @foreach($listCategory as $key => $category)--}}
+{{--                                <option value="{{$category->id}}">{{$category->name}}</option>--}}
+{{--                            @endforeach--}}
                         </select>
                     </div>
                     <div class="form-group">
