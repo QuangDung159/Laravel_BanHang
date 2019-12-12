@@ -88,12 +88,12 @@
                             </td>
                             <td>
                                 <span class="text-ellipsis">
-                                    {{$category->created_at}}
+                                    {{date('Y/m/d H:i:s', $category->created_at)}}
                                 </span>
                             </td>
                             <td>
                                 <span class="text-ellipsis">
-                                    {{$category->updated_at}}
+                                    {{date('Y/m/d H:i:s', $category->created_at)}}
                                 </span>
                             </td>
                             <td>

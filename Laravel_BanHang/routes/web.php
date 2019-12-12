@@ -12,6 +12,7 @@
 */
 
 const CATEGORY_CONTROLLER = 'CategoryController@';
+const BRAND_CONTROLLER = 'BrandController@';
 
 // Client site
 Route::get('/', 'HomeController@index');
@@ -35,5 +36,16 @@ Route::group(['prefix' => '/admin'], function () {
         Route::post('/doEditCategory/{id}', CATEGORY_CONTROLLER . 'doEditCategory');
         Route::get('/edit/{id}', CATEGORY_CONTROLLER . 'showEditCategoryPage');
         Route::get('/delete/{id}', CATEGORY_CONTROLLER . 'deleteCategory');
+    });
+
+    // brand
+    Route::group(['prefix' => '/brand'], function () {
+        Route::get('/add', BRAND_CONTROLLER . 'doShowAddPage');
+        Route::get('/all', BRAND_CONTROLLER . 'doShowAllPage');
+        Route::post('/doAdd', BRAND_CONTROLLER . 'doAdd');
+        Route::get('/changeStatus', BRAND_CONTROLLER . 'changeStatus');
+        Route::post('/doEdit/{id}', BRAND_CONTROLLER . 'doEdit');
+        Route::get('/edit/{id}', BRAND_CONTROLLER . 'showEditPage');
+        Route::get('/delete/{id}', BRAND_CONTROLLER . 'doDelete');
     });
 });

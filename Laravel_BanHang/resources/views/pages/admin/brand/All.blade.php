@@ -26,7 +26,7 @@
     <div class="table-agile-info">
         <div class="panel panel-default">
             <div class="panel-heading">
-                CATEGORY
+                BRAND
             </div>
             <div class="row w3-res-tb">
                 <div class="col-sm-5 m-b-xs">
@@ -67,20 +67,20 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($listCategory as $key => $category)
+                    @foreach($listBrand as $key => $brand)
                         <tr>
                             <td><label class="i-checks m-b-none"><input type="checkbox"
                                                                         name="post[]"><i></i></label></td>
-                            <td><span class="text-ellipsis">{{$category->name}}</span></td>
-                            <td><span class="text-ellipsis">{{$category->code}}</span></td>
+                            <td><span class="text-ellipsis">{{$brand->name}}</span></td>
+                            <td><span class="text-ellipsis">{{$brand->code}}</span></td>
                             <td>
                                 <span class="text-ellipsis">
-                                    @if($category->status == 1)
-                                        <a href="{{URL::to('/admin/category/changeStatus?id=' . $category->id)}}{{'&status=0'}}">
+                                    @if($brand->status == 1)
+                                        <a href="{{URL::to('/admin/brand/changeStatus?id=' . $brand->id)}}{{'&status=0'}}">
                                             <span class="label label-success">Active</span>
                                         </a>
                                     @else
-                                        <a href="{{URL::to('/admin/category/changeStatus?id=' . $category->id)}}{{'&status=1'}}">
+                                        <a href="{{URL::to('/admin/brand/changeStatus?id=' . $brand->id)}}{{'&status=1'}}">
                                             <span class="label label-danger">Inactive</span>
                                         </a>
                                     @endif
@@ -88,20 +88,20 @@
                             </td>
                             <td>
                                 <span class="text-ellipsis">
-                                    {{$category->created_at}}
+                                    {{date('Y/m/d H:i:s', $brand->created_at)}}
                                 </span>
                             </td>
                             <td>
                                 <span class="text-ellipsis">
-                                    {{$category->updated_at}}
+                                    {{date('Y/m/d H:i:s', $brand->updated_at)}}
                                 </span>
                             </td>
                             <td>
-                                <a href="{{URL::to('/admin/category/edit/' . $category->id)}}" class="active"
+                                <a href="{{URL::to('/admin/brand/edit/' . $brand->id)}}" class="active"
                                    ui-toggle-class="">
                                     <i class="fa fa-pencil text-success text-active"></i>
                                 </a>
-                                <a href="{{URL::to('/admin/category/delete/' . $category->id)}}"
+                                <a href="{{URL::to('/admin/brand/delete/' . $brand->id)}}"
                                    onclick="return confirm('Are you want to delete this?')" class="active">
                                     <i class="fa fa-times text-danger text"></i>
                                 </a>
