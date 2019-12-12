@@ -6,7 +6,8 @@
         </header>
         <div class="panel-body">
             <div class="position-center">
-                <form role="form" action="{{URL::to('/admin/product/doAdd')}}" method="post">
+                <form role="form" action="{{URL::to('/admin/product/doAdd')}}" method="post"
+                      enctype="multipart/form-data">
                     {{csrf_field()}}
                     <div class="form-group">
                         <label for="brand_id">Brand name</label>
@@ -44,7 +45,8 @@
                     </div>
                     <div class="form-group">
                         <label for="price">Product price</label>
-                        <input type="text" class="form-control" id="price" name="price" placeholder="Enter product price">
+                        <input type="text" class="form-control" id="price" name="price"
+                               placeholder="Enter product price">
                     </div>
                     <div class="form-group">
                         <label for="image">Product image</label>

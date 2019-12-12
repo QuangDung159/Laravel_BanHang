@@ -14,6 +14,7 @@ class ProductController extends Controller
     const PATH = 'pages.admin.product.';
     const URL = '/admin/product';
     const TABLE_NAME = 'product';
+    const PATH_TO_UPLOAD_PRODUCT = '/upload/product';
 
     public function doShowAddPage()
     {
@@ -53,9 +54,11 @@ class ProductController extends Controller
         $data['created_at'] = time();
         $data['updated_at'] = time();
 
-        $image = file('image');
+        $image = $req->file('image');
         if ($image) {
-
+            $new_name = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path() . self::PATH_TO_UPLOAD_PRODUCT, $new_name);
+            $data['image'] = $new_name;
         }
 
         if (count($data) != 0) {
