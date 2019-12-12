@@ -56,9 +56,9 @@ class ProductController extends Controller
 
         $image = $req->file('image');
         if ($image) {
-            $new_name = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path() . self::PATH_TO_UPLOAD_PRODUCT, $new_name);
-            $data['image'] = $new_name;
+            $newName = time() . '_' . rand(0, 9) . '_' . $req->name . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path() . self::PATH_TO_UPLOAD_PRODUCT, $newName);
+            $data['image'] = $newName;
         }
 
         if (count($data) != 0) {
