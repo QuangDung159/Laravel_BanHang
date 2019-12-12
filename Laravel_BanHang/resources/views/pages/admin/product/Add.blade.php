@@ -9,12 +9,35 @@
                 <form role="form" action="{{URL::to('/admin/product/doAdd')}}" method="post">
                     {{csrf_field()}}
                     <div class="form-group">
+                        <label for="status">Brand name</label>
+                        <select class="form-control input-sm m-bot15" id="status" name="status">
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Category name</label>
+                        <select class="form-control input-sm m-bot15" id="status" name="status">
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="name">Product name</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Enter product name">
                     </div>
                     <div class="form-group">
                         <label for="code">Product code</label>
                         <input type="text" class="form-control" id="code" name="code" placeholder="Enter product code">
+                    </div>
+                    <div class="form-group ">
+                        <label for="description">Product description</label>
+                        <textarea class="form-control" id="description" name="description"
+                                  placeholder="Enter category description" style="resize: none;" rows="5"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Product price</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter product name">
                     </div>
                     <div class="form-group">
                         <label for="status">Product status</label>
