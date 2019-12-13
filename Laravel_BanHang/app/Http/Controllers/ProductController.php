@@ -193,8 +193,9 @@ class ProductController extends Controller
         }
 
         $product = DB::table(self::TABLE_NAME)
-            ->select(['product.*', 'brand.name as brand_name'])
+            ->select(['product.*', 'category.name as category_name', 'brand.name as brand_name'])
             ->join('brand', self::TABLE_NAME . '.brand_id', '=', 'brand.id')
+            ->join('category', self::TABLE_NAME . '.category_id', '=', 'category.id')
             ->where(self::TABLE_NAME . '.id', '=', $id)
             ->where(self::TABLE_NAME . '.is_deleted', '=', 0)
             ->where(self::TABLE_NAME . '.status', '=', 1)
@@ -204,9 +205,34 @@ class ProductController extends Controller
             return view(self::PATH_CLIENT . 'NotFound');
         }
 
+        $listProductRecommend = $this->getListRecommendProductByCategoryId($product->category_id, $id);
+
+        $arrProduct = [];
+
+        foreach ($listProductRecommend as $item) {
+            array_push($arrProduct, $item);
+        }
+
+        $arrProductRecommend = array_chunk($arrProduct, 3);
+
         return view(self::PATH_CLIENT . 'ProductDetail')
             ->with('listCategory', $listCategory)
             ->with('listBrand', $listBrand)
-            ->with('product', $product);
+            ->with('product', $product)
+            ->with('listProductRecommend', $arrProductRecommend);
+    }
+
+    public function getListRecommendProductByCategoryId($categoryId, $productId)
+    {
+        return DB::table(self::TABLE_NAME)
+            ->select([self::TABLE_NAME . '.*', 'category.name as category_name'])
+            ->join('category', self::TABLE_NAME . '.category_id', '=', 'category.id')
+            ->where(self::TABLE_NAME . '.category_id', '=', $categoryId)
+            ->where(self::TABLE_NAME . '.is_deleted', '=', 0)
+            ->where(self::TABLE_NAME . '.status', '=', 1)
+            ->where(self::TABLE_NAME . '.id', '!=', $productId)
+            ->limit(9)
+            ->orderByDesc(self::TABLE_NAME . '.rate')
+            ->get();
     }
 }

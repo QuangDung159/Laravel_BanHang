@@ -14,6 +14,7 @@
 const CATEGORY_CONTROLLER = 'CategoryController@';
 const BRAND_CONTROLLER = 'BrandController@';
 const PRODUCT_CONTROLLER = 'ProductController@';
+const CART_CONTROLLER = 'CartController@';
 
 // Client site
 Route::group(['middleware' => 'cache.client.data'], function () {
@@ -23,6 +24,7 @@ Route::group(['middleware' => 'cache.client.data'], function () {
     Route::get('/category/{id}', CATEGORY_CONTROLLER . 'showProductByCategory');
     Route::get('/brand/{id}', BRAND_CONTROLLER . 'showProductByBrand');
     Route::get('/product/{id}', PRODUCT_CONTROLLER . 'showProductDetailPage');
+    Route::post('/doAddToCart', CART_CONTROLLER . 'doAddToCart');
 });
 
 // Admin site
