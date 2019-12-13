@@ -16,11 +16,13 @@ const BRAND_CONTROLLER = 'BrandController@';
 const PRODUCT_CONTROLLER = 'ProductController@';
 
 // Client site
-Route::get('/', 'HomeController@index');
-Route::get('/home', 'HomeController@index');
+Route::group(['middleware' => 'cache.client.data'], function () {
+    Route::get('/', 'HomeController@index');
+    Route::get('/home', 'HomeController@index');
 
-Route::get('/category/{id}', CATEGORY_CONTROLLER . 'showProductByCategory');
-Route::get('/brand/{id}', BRAND_CONTROLLER . 'showProductByBrand');
+    Route::get('/category/{id}', CATEGORY_CONTROLLER . 'showProductByCategory');
+    Route::get('/brand/{id}', BRAND_CONTROLLER . 'showProductByBrand');
+});
 
 // Admin site
 Route::post('/doLoginAdmin', 'AdminController@doLoginAdmin');

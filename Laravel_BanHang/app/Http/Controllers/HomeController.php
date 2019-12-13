@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 
 class HomeController extends Controller
 {
@@ -11,23 +12,9 @@ class HomeController extends Controller
 
     public function index()
     {
-        $listBrand = DB::table('brand')
-            ->select(
-                [
-                    'brand.id',
-                    'brand.name',
-                    DB::raw('COUNT(product.id) as number_product')
-                ]
-            )
-            ->where('brand.is_deleted', '=', 0)
-            ->where('brand.status', '=', 1)
-            ->leftJoin('product', 'brand.id', '=', 'product.brand_id')
-            ->groupBy('brand.id', 'brand.name')
-            ->get();
+        $listCategory = json_decode(Redis::get('list_category'));
 
-        $listCategory = DB::table('category')
-            ->where('is_deleted', '=', 0)
-            ->where('status', '=', 1)->get();
+        $listBrand = json_decode(Redis::get('list_brand'));
 
         $listProduct = DB::table('product')
             ->where('product.is_deleted', '=', 0)
