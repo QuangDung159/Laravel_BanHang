@@ -186,10 +186,27 @@ class ProductController extends Controller
     public function showProductDetailPage($id)
     {
         $listCategory = json_decode(Redis::get('list_category'));
-
         $listBrand = json_decode(Redis::get('list_brand'));
+
+        if (!$id) {
+            return view(self::PATH_CLIENT . 'NotFound');
+        }
+
+        $product = DB::table(self::TABLE_NAME)
+            ->select(['product.*', 'brand.name as brand_name'])
+            ->join('brand', self::TABLE_NAME . '.brand_id', '=', 'brand.id')
+            ->where(self::TABLE_NAME . '.id', '=', $id)
+            ->where(self::TABLE_NAME . '.is_deleted', '=', 0)
+            ->where(self::TABLE_NAME . '.status', '=', 1)
+            ->first();
+
+        if (!$product) {
+            return view(self::PATH_CLIENT . 'NotFound');
+        }
+
         return view(self::PATH_CLIENT . 'ProductDetail')
             ->with('listCategory', $listCategory)
-            ->with('listBrand', $listBrand);
+            ->with('listBrand', $listBrand)
+            ->with('product', $product);
     }
 }
