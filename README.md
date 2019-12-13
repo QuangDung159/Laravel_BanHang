@@ -22,5 +22,10 @@ If you get this error "mkdir(): Invalid path" -> try php artisan config:clear ->
 
 This project using Redis for cache
 
+https://stackoverflow.com/questions/51908004/install-phpredis-mac-osx
+
+Install Redis :
+brew install redis
+
 Start Redis server : 
 redis-server /usr/local/etc/redis.conf
