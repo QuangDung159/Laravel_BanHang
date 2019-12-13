@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
@@ -161,23 +162,8 @@ class CategoryController extends Controller
                 return view('pages.client.NotFound');
             }
 
-            $listCategory = DB::table('category')
-                ->where('is_deleted', '=', 0)
-                ->where('status', '=', 1)->get();
-
-            $listBrand = DB::table('brand')
-                ->select(
-                    [
-                        'brand.id',
-                        'brand.name',
-                        DB::raw('COUNT(product.id) as number_product')
-                    ]
-                )
-                ->where('brand.is_deleted', '=', 0)
-                ->where('brand.status', '=', 1)
-                ->leftJoin('product', 'brand.id', '=', 'product.brand_id')
-                ->groupBy('brand.id', 'brand.name')
-                ->get();
+            $listCategory = json_decode(Redis::get('list_category'));
+            $listBrand = json_decode(Redis::get('list_brand'));
 
             return view(self::PATH_TO_CLIENT . 'ProductByCategory')
                 ->with('listProduct', $listProduct)

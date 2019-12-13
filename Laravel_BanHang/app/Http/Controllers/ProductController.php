@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Session;
 
 session_start();
@@ -13,6 +14,8 @@ class ProductController extends Controller
 {
     const PATH = 'pages.admin.product.';
     const URL = '/admin/product';
+    const PATH_CLIENT = 'pages.client.';
+    const URL_CLIENT = '/product';
     const TABLE_NAME = 'product';
     const PATH_TO_UPLOAD_PRODUCT = '/upload/product';
 
@@ -178,5 +181,15 @@ class ProductController extends Controller
         } else {
             return view('pages.admin.NotFound');
         }
+    }
+
+    public function showProductDetailPage($id)
+    {
+        $listCategory = json_decode(Redis::get('list_category'));
+
+        $listBrand = json_decode(Redis::get('list_brand'));
+        return view(self::PATH_CLIENT . 'ProductDetail')
+            ->with('listCategory', $listCategory)
+            ->with('listBrand', $listBrand);
     }
 }
