@@ -11,6 +11,16 @@ Generate model from exitind database If you are using MySQL and Laravel 5.1 or a
 composer require reliese/laravel
 
 Add the service provider to your config/app.php file Reliese\Coders\CodersServiceProvider::class
+
 Publish the config file with php artisan vendor:publish --tag=reliese-models
+
 Make sure your database is correctly configured in config/database.php and .env files.
-And finally issue the command: php artisan code:models If you get this error "mkdir(): Invalid path" -> try php artisan config:clear -> do step 4 This package will scan your database and create all models for you. If you need something more specific, you can customize its config file.
+
+And finally issue the command: php artisan code:models.
+
+If you get this error "mkdir(): Invalid path" -> try php artisan config:clear -> do step 4 This package will scan your database and create all models for you. If you need something more specific, you can customize its config file.
+
+This project using Redis for cache
+
+Start Redis server : 
+redis-server /usr/local/etc/redis.conf
