@@ -7,16 +7,24 @@
         Session::put('msg_sign_up_success', null);
     }
     ?>
+
+    <?php
+    if (Session::get('msg_login_fail') != null) {
+        echo
+            '<div class="alert alert-warning"><strong>' . Session::get('msg_login_fail') . '</strong></div>';
+        Session::put('msg_login_fail', null);
+    }
+    ?>
     <section id="form"><!--form-->
         <div class="container">
             <div class="row">
                 <div class="col-sm-4 col-sm-offset-1">
                     <div class="signup-form"><!--login form-->
                         <h2>Login to your account</h2>
-                        <form action="#">
+                        <form action="{{URL::to('doLogin')}}" method="post">
                             {{csrf_field()}}
-                            <input type="text" placeholder="Name"/>
-                            <input type="email" placeholder="Email Address"/>
+                            <input type="email" name="email" placeholder="Email Address"/>
+                            <input type="password" name="password" placeholder="Password"/>
                             <button type="submit" class="btn btn-default">Login</button>
                         </form>
                     </div><!--/login form-->
