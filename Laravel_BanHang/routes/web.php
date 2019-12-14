@@ -26,6 +26,7 @@ Route::group(['middleware' => 'cache.client.data'], function () {
     Route::get('/product/{id}', PRODUCT_CONTROLLER . 'showProductDetailPage');
     Route::post('/doAddToCart', CART_CONTROLLER . 'doAddToCart');
     Route::get('/doRemoveItemInCart/{rowId}', CART_CONTROLLER . 'doRemoveItemInCart');
+    Route::post('/doUpdateQtyInCart/{rowId}', CART_CONTROLLER . 'doUpdateQtyInCart');
     Route::get('/cart', CART_CONTROLLER . 'showCartPage');
 });
 

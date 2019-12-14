@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Redis;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
@@ -43,7 +44,7 @@ class CartController extends Controller
         $data['weight'] = 0;
         $data['options']['image'] = $product->image;
         Cart::add($data);
-        return redirect(self::URL_CART);
+        return Redirect::to(self::URL_CART);
     }
 
     public function showCartPage()
@@ -69,6 +70,21 @@ class CartController extends Controller
 
         Cart::remove($rowId);
 
-        return redirect(self::URL_CART);
+        return Redirect::to(self::URL_CART);
+    }
+
+    public function doUpdateQtyInCart($rowId, Request $req)
+    {
+        if (!$rowId) {
+            return view(self::PATH_CLIENT . 'NotFound');
+        }
+
+        $qty = $req->qty;
+        if (!$qty || $qty == 0) {
+            return view(self::PATH_CLIENT . 'NotFound');
+        }
+
+        Cart::update($rowId, $qty);
+        return Redirect::to(self::URL_CART);
     }
 }
