@@ -12,17 +12,22 @@
                                 <img src="{{asset('upload/product')}}/{{$product->image}}" alt=""/>
                                 <h2>${{$product->price}}</h2>
                                 <p>{{$product->name}}</p>
-                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>
-                                    Add to cart
-                                </a>
                             </div>
                             <div class="product-overlay">
                                 <div class="overlay-content">
                                     <h2><a href="{{URL::to('/product')}}/{{$product->id}}">${{$product->price}}</a></h2>
                                     <p><a href="{{URL::to('/product')}}/{{$product->id}}">{{$product->name}}</a></p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>
-                                        Add to cart
-                                    </a>
+                                    @if($product->qty > 0)
+                                        <button type="submit" class="btn btn-fefault cart">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            Add to cart
+                                        </button>
+                                    @else
+                                        <button type="submit" class="btn btn-fefault cart" disabled>
+                                            <i class="fa fa-shopping-cart"></i>
+                                            Add to cart
+                                        </button>
+                                    @endif
                                 </div>
                             </div>
                         </div>

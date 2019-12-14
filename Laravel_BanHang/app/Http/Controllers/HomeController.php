@@ -19,13 +19,16 @@ class HomeController extends Controller
         $listProduct = DB::table('product')
             ->where('product.is_deleted', '=', 0)
             ->where('product.status', '=', 1)
-            ->orderBy('created_at')
+            ->where('product.qty', '>', 0)
+            ->orderBy('rate')
             ->limit(6)
             ->get();
 
         return view(self::PATH_TO_CLIENT_PAGES_DIRECTORY . 'Home')
             ->with('listBrand', $listBrand)
             ->with('listCategory', $listCategory)
-            ->with('listProduct', $listProduct);
+            ->with('listProduct', $listProduct)
+            ->with('isShowSlider', true)
+            ->with('isShowSideBar', true);
     }
 }
