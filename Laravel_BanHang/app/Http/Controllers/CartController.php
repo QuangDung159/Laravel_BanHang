@@ -53,13 +53,18 @@ class CartController extends Controller
         $listBrand = json_decode(Redis::get('list_brand'));
 
         $cart = Cart::content();
+        $total = 0;
+        foreach ($cart as $item) {
+            $total += $item->price * $item->qty;
+        }
 
         return view(self::PATH_CLIENT . 'Cart')
             ->with('listBrand', $listBrand)
             ->with('listCategory', $listCategory)
             ->with('isShowSlider', false)
             ->with('isShowSideBar', false)
-            ->with('cart', $cart);
+            ->with('cart', $cart)
+            ->with('total', $total);
     }
 
     public function doRemoveItemInCart($rowId)
@@ -86,5 +91,10 @@ class CartController extends Controller
 
         Cart::update($rowId, $qty);
         return Redirect::to(self::URL_CART);
+    }
+
+    public function doCheckout()
+    {
+
     }
 }

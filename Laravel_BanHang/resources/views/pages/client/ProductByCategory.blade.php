@@ -15,19 +15,25 @@
                             </div>
                             <div class="product-overlay">
                                 <div class="overlay-content">
-                                    <h2><a href="{{URL::to('/product')}}/{{$product->id}}">${{$product->price}}</a></h2>
-                                    <p><a href="{{URL::to('/product')}}/{{$product->id}}">{{$product->name}}</a></p>
-                                    @if($product->qty > 0)
-                                        <button type="button" class="btn btn-fefault cart">
-                                            <i class="fa fa-shopping-cart"></i>
-                                            Add to cart
-                                        </button>
-                                    @else
-                                        <button type="submit" class="btn btn-fefault cart" disabled>
-                                            <i class="fa fa-shopping-cart"></i>
-                                            Add to cart
-                                        </button>
-                                    @endif
+                                    <form action="{{URL::to('/doAddToCart')}}" method="post">
+                                        {{csrf_field()}}
+                                        <h2><a href="{{URL::to('/product')}}/{{$product->id}}">${{$product->price}}</a>
+                                        </h2>
+                                        <p><a href="{{URL::to('/product')}}/{{$product->id}}">{{$product->name}}</a></p>
+                                        <input type="hidden" value="1" name="qty">
+                                        <input type="hidden" value="{{$product->id}}" name="product_id">
+                                        @if($product->qty > 0)
+                                            <button type="submit" class="btn btn-fefault cart">
+                                                <i class="fa fa-shopping-cart"></i>
+                                                Add to cart
+                                            </button>
+                                        @else
+                                            <button type="submit" class="btn btn-fefault cart" disabled>
+                                                <i class="fa fa-shopping-cart"></i>
+                                                Add to cart
+                                            </button>
+                                        @endif
+                                    </form>
                                 </div>
                             </div>
                         </div>

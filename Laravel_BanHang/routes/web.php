@@ -15,6 +15,7 @@ const CATEGORY_CONTROLLER = 'CategoryController@';
 const BRAND_CONTROLLER = 'BrandController@';
 const PRODUCT_CONTROLLER = 'ProductController@';
 const CART_CONTROLLER = 'CartController@';
+const USER_CONTROLLER = 'UserController@';
 
 // Client site
 Route::group(['middleware' => 'cache.client.data'], function () {
@@ -28,6 +29,8 @@ Route::group(['middleware' => 'cache.client.data'], function () {
     Route::get('/doRemoveItemInCart/{rowId}', CART_CONTROLLER . 'doRemoveItemInCart');
     Route::post('/doUpdateQtyInCart/{rowId}', CART_CONTROLLER . 'doUpdateQtyInCart');
     Route::get('/cart', CART_CONTROLLER . 'showCartPage');
+    Route::get('/login', USER_CONTROLLER . 'showLoginPage');
+    Route::get('/checkout', CART_CONTROLLER . 'doCheckout');
 });
 
 // Admin site
