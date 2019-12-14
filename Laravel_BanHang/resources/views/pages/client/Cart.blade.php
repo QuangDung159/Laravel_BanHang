@@ -21,14 +21,17 @@
                     </tr>
                     </thead>
                     <tbody>
+                    {{$total = 0}}
                     @foreach($cart as $key => $item)
+                        {{$total += $item->price * $item->qty}}
                         <tr>
                             <td class="cart_product">
-                                <a href=""><img width="150" src="{{asset('/upload/product')}}/{{$item->options->image}}"
-                                                alt=""></a>
+                                <a href="{{URL::to('/product')}}/{{$item->id}}"><img width="150"
+                                                                                     src="{{asset('/upload/product')}}/{{$item->options->image}}"
+                                                                                     alt=""></a>
                             </td>
                             <td class="cart_description">
-                                <h4><a href="">{{$item->name}}</a></h4>
+                                <h4><a href="{{URL::to('/product')}}/{{$item->id}}">{{$item->name}}</a></h4>
                                 <p>Web ID: {{$item->id}}</p>
                             </td>
                             <td class="cart_price">
@@ -36,15 +39,14 @@
                             </td>
                             <td class="cart_quantity">
                                 <div class="cart_quantity_button">
-                                    <a class="cart_quantity_up" href="">
-                                        <i class="fa fa-plus"></i>
-                                    </a>
-                                    <input class="cart_quantity_input" type="text" name="qty"
-                                           value="{{$item->qty}}"
-                                           autocomplete="off" size="2">
-                                    <a class="cart_quantity_down" href="">
-                                        <i class="fa fa-minus"></i>
-                                    </a>
+                                    <form action="{{URL::to('/doUpdateQtyInCart')}}/{{$item->rowId}}" method="post">
+                                        {{csrf_field()}}
+                                        <button type="submit" class="btn btn-warning btn-sm"><i class="fa fa-check"></i>
+                                        </button>
+                                        <input class="cart_quantity_input" type="text" name="qty"
+                                               value="{{$item->qty}}"
+                                               autocomplete="off" size="2">
+                                    </form>
                                 </div>
                             </td>
                             <td class="cart_total">
@@ -77,7 +79,7 @@
                         <div class="col-sm-6">
                             <ul>
                                 <li>Shipping Cost <span>Free</span></li>
-                                <li>Total <span>$61</span></li>
+                                <li>Total <span>${{$total}}</span></li>
                             </ul>
                         </div>
                         <a class="btn btn-default update" href="">Update</a>
