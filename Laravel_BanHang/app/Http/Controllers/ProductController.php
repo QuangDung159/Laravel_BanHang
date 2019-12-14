@@ -19,6 +19,7 @@ class ProductController extends Controller
     const TABLE_NAME = 'product';
     const PATH_TO_UPLOAD_PRODUCT = '/upload/product';
 
+    // admin
     public function doShowAddPage()
     {
         $listBrand = DB::table('brand')
@@ -183,6 +184,7 @@ class ProductController extends Controller
         }
     }
 
+    // client
     public function showProductDetailPage($id)
     {
         $listCategory = json_decode(Redis::get('list_category'));

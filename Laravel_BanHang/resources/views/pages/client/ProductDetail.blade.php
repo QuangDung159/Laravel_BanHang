@@ -38,17 +38,24 @@
                     <h2>{{$product->name}}</h2>
                     <p>Web ID: {{$product->code}}</p>
                     <img src="{{asset('client/images/rating.png')}}" alt=""/>
-                    <form action="" method="post">
+                    <form action="{{URL::to('/doAddToCart')}}" method="post">
                         {{csrf_field()}}
                         <span>
                             <span>US ${{$product->price}}</span>
                             <label>Quantity:</label>
                             <input type="text" value="1" name="qty"/>
                             <input type="hidden" value="{{$product->id}}" name="product_id"/>
-                            <button type="submit" class="btn btn-fefault cart">
-                                <i class="fa fa-shopping-cart"></i>
-                                Add to cart
-                            </button>
+                            @if($product->qty > 0)
+                                <button type="submit" class="btn btn-fefault cart">
+                                    <i class="fa fa-shopping-cart"></i>
+                                        Add to cart
+                                </button>
+                            @else
+                                <button type="submit" class="btn btn-fefault cart" disabled>
+                                    <i class="fa fa-shopping-cart"></i>
+                                        Add to cart
+                                </button>
+                            @endif
                         </span>
                     </form>
                     <p><b>Brand:</b> {{$product->brand_name}}</p>
@@ -121,60 +128,47 @@
 
             <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
-                    <div class="item active">
-                        @foreach($listProductRecommend[0] as $key => $product)
-                            <div class="col-sm-4">
-                                <div class="product-image-wrapper">
-                                    <div class="single-products">
-                                        <div class="productinfo text-center">
-                                            <img src="images/home/recommend1.jpg" alt=""/>
-                                            <h2>{{$product->price}}</h2>
-                                            <p>{{$product->name}}</p>
-                                            <button type="button" class="btn btn-default add-to-cart"><i
-                                                    class="fa fa-shopping-cart"></i>Add to cart
-                                            </button>
+                    @foreach($listProductRecommend as $key1 => $tripleProduct)
+                        @if ($key1 == 0)
+                            <div class="item active">
+                                @foreach($tripleProduct as $key => $product)
+                                    <div class="col-sm-4">
+                                        <div class="product-image-wrapper">
+                                            <div class="single-products">
+                                                <div class="productinfo text-center">
+                                                    <img src="{{asset('/upload/product')}}/{{$product->image}}" alt=""/>
+                                                    <h2>{{$product->price}}</h2>
+                                                    <p>{{$product->name}}</p>
+                                                    <button type="button" class="btn btn-default add-to-cart"><i
+                                                            class="fa fa-shopping-cart"></i>Add to cart
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endforeach
                             </div>
-                        @endforeach
-                    </div>
-                    <div class="item">
-                        @foreach($listProductRecommend[1] as $key => $product)
-                            <div class="col-sm-4">
-                                <div class="product-image-wrapper">
-                                    <div class="single-products">
-                                        <div class="productinfo text-center">
-                                            <img src="images/home/recommend1.jpg" alt=""/>
-                                            <h2>{{$product->price}}</h2>
-                                            <p>{{$product->name}}</p>
-                                            <button type="button" class="btn btn-default add-to-cart"><i
-                                                    class="fa fa-shopping-cart"></i>Add to cart
-                                            </button>
+                        @else
+                            <div class="item">
+                                @foreach($tripleProduct as $key => $product)
+                                    <div class="col-sm-4">
+                                        <div class="product-image-wrapper">
+                                            <div class="single-products">
+                                                <div class="productinfo text-center">
+                                                    <img src="{{asset('/upload/product')}}/{{$product->image}}" alt=""/>
+                                                    <h2>{{$product->price}}</h2>
+                                                    <p>{{$product->name}}</p>
+                                                    <button type="button" class="btn btn-default add-to-cart"><i
+                                                            class="fa fa-shopping-cart"></i>Add to cart
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endforeach
                             </div>
-                        @endforeach
-                    </div>
-                    <div class="item">
-                        @foreach($listProductRecommend[2] as $key => $product)
-                            <div class="col-sm-4">
-                                <div class="product-image-wrapper">
-                                    <div class="single-products">
-                                        <div class="productinfo text-center">
-                                            <img src="images/home/recommend1.jpg" alt=""/>
-                                            <h2>{{$product->price}}</h2>
-                                            <p>{{$product->name}}</p>
-                                            <button type="button" class="btn btn-default add-to-cart"><i
-                                                    class="fa fa-shopping-cart"></i>Add to cart
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
+                        @endif
+                    @endforeach
                 </div>
                 <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
                     <i class="fa fa-angle-left"></i>
