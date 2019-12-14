@@ -21,9 +21,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {{$total = 0}}
                     @foreach($cart as $key => $item)
-                        {{$total += $item->price * $item->qty}}
                         <tr>
                             <td class="cart_product">
                                 <a href="{{URL::to('/product')}}/{{$item->id}}"><img width="150"
@@ -61,6 +59,11 @@
                     @endforeach
                     </tbody>
                 </table>
+                <div style="text-align: center">
+                    @if (count($cart) == 0)
+                        <h2><a href="{{URL::to('/home')}}">Let's shopping!</a></h2>
+                    @endif
+                </div>
             </div>
         </div>
     </section> <!--/#cart_items-->
@@ -82,8 +85,7 @@
                                 <li>Total <span>${{$total}}</span></li>
                             </ul>
                         </div>
-                        <a class="btn btn-default update" href="">Update</a>
-                        <a class="btn btn-default check_out" href="">Check Out</a>
+                        <a class="btn btn-default check_out" href="{{URL::to('/checkout')}}">Check Out</a>
                     </div>
                 </div>
             </div>

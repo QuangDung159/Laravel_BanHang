@@ -15,6 +15,8 @@ const CATEGORY_CONTROLLER = 'CategoryController@';
 const BRAND_CONTROLLER = 'BrandController@';
 const PRODUCT_CONTROLLER = 'ProductController@';
 const CART_CONTROLLER = 'CartController@';
+const USER_CONTROLLER = 'UserController@';
+const ORDER_CONTROLLER = 'OrderController@';
 
 // Client site
 Route::group(['middleware' => 'cache.client.data'], function () {
@@ -24,10 +26,20 @@ Route::group(['middleware' => 'cache.client.data'], function () {
     Route::get('/category/{id}', CATEGORY_CONTROLLER . 'showProductByCategory');
     Route::get('/brand/{id}', BRAND_CONTROLLER . 'showProductByBrand');
     Route::get('/product/{id}', PRODUCT_CONTROLLER . 'showProductDetailPage');
-    Route::post('/doAddToCart', CART_CONTROLLER . 'doAddToCart');
-    Route::get('/doRemoveItemInCart/{rowId}', CART_CONTROLLER . 'doRemoveItemInCart');
-    Route::post('/doUpdateQtyInCart/{rowId}', CART_CONTROLLER . 'doUpdateQtyInCart');
-    Route::get('/cart', CART_CONTROLLER . 'showCartPage');
+
+    Route::group(['middleware' => 'auth.user'], function () {
+        Route::post('/doAddToCart', CART_CONTROLLER . 'doAddToCart');
+        Route::get('/doRemoveItemInCart/{rowId}', CART_CONTROLLER . 'doRemoveItemInCart');
+        Route::post('/doUpdateQtyInCart/{rowId}', CART_CONTROLLER . 'doUpdateQtyInCart');
+        Route::get('/cart', CART_CONTROLLER . 'showCartPage');
+        Route::get('/checkout', CART_CONTROLLER . 'showCheckOutPage');
+        Route::post('/doAddOrder', ORDER_CONTROLLER . 'doAddOrder');
+    });
+
+    Route::get('/login', USER_CONTROLLER . 'showLoginPage');
+    Route::post('/doSignUp', USER_CONTROLLER . 'doSignUp');
+    Route::post('/doLogin', USER_CONTROLLER . 'doLogin');
+    Route::get('/doLogout', USER_CONTROLLER . 'doLogout');
 });
 
 // Admin site
