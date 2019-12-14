@@ -19,7 +19,8 @@ class HomeController extends Controller
         $listProduct = DB::table('product')
             ->where('product.is_deleted', '=', 0)
             ->where('product.status', '=', 1)
-            ->orderBy('created_at')
+            ->where('product.qty', '>', 0)
+            ->orderBy('rate')
             ->limit(6)
             ->get();
 
