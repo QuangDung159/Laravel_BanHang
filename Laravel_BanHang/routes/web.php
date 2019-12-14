@@ -31,6 +31,7 @@ Route::group(['middleware' => 'cache.client.data'], function () {
     Route::get('/cart', CART_CONTROLLER . 'showCartPage');
     Route::get('/login', USER_CONTROLLER . 'showLoginPage');
     Route::get('/checkout', CART_CONTROLLER . 'doCheckout');
+    Route::post('/doSignUp', USER_CONTROLLER . 'doSignUp');
 });
 
 // Admin site
