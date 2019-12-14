@@ -91,6 +91,7 @@
       <path value="$PROJECT_DIR$/Laravel_BanHang/vendor/doctrine/cache" />
       <path value="$PROJECT_DIR$/Laravel_BanHang/vendor/doctrine/event-manager" />
       <path value="$PROJECT_DIR$/Laravel_BanHang/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/Laravel_BanHang/vendor/bumbummen99/shoppingcart" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
