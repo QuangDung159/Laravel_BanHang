@@ -37,6 +37,11 @@
                     <img src="images/product-details/new.jpg" class="newarrival" alt=""/>
                     <h2>{{$product->name}}</h2>
                     <p>Web ID: {{$product->code}}</p>
+                    @if ($product->qty > 0)
+                        <p>Status: Available</p>
+                    @else
+                        <p>Status: Out of stock</p>
+                    @endif
                     <img src="{{asset('client/images/rating.png')}}" alt=""/>
                     <form action="{{URL::to('/doAddToCart')}}" method="post">
                         {{csrf_field()}}
@@ -139,9 +144,17 @@
                                                     <img src="{{asset('/upload/product')}}/{{$product->image}}" alt=""/>
                                                     <h2>{{$product->price}}</h2>
                                                     <p>{{$product->name}}</p>
-                                                    <button type="button" class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>Add to cart
-                                                    </button>
+                                                    @if($product->qty > 0)
+                                                        <button type="submit" class="btn btn-fefault cart">
+                                                            <i class="fa fa-shopping-cart"></i>
+                                                            Add to cart
+                                                        </button>
+                                                    @else
+                                                        <button type="submit" class="btn btn-fefault cart" disabled>
+                                                            <i class="fa fa-shopping-cart"></i>
+                                                            Add to cart
+                                                        </button>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -158,9 +171,17 @@
                                                     <img src="{{asset('/upload/product')}}/{{$product->image}}" alt=""/>
                                                     <h2>{{$product->price}}</h2>
                                                     <p>{{$product->name}}</p>
-                                                    <button type="button" class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>Add to cart
-                                                    </button>
+                                                    @if($product->qty > 0)
+                                                        <button type="submit" class="btn btn-fefault cart">
+                                                            <i class="fa fa-shopping-cart"></i>
+                                                            Add to cart
+                                                        </button>
+                                                    @else
+                                                        <button type="submit" class="btn btn-fefault cart" disabled>
+                                                            <i class="fa fa-shopping-cart"></i>
+                                                            Add to cart
+                                                        </button>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
