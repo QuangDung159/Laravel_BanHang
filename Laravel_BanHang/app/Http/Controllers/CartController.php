@@ -97,4 +97,11 @@ class CartController extends Controller
     {
 
     }
+
+    public function showCheckOutPage()
+    {
+        return view(self::PATH_CLIENT . '.CheckOut')
+            ->with('isShowSideBar', false)
+            ->with('isShowSlider', false);
+    }
 }

@@ -85,7 +85,6 @@
                                 <li>Total <span>${{$total}}</span></li>
                             </ul>
                         </div>
-                        <a class="btn btn-default update" href="">Update</a>
                         <a class="btn btn-default check_out" href="{{URL::to('/checkout')}}">Check Out</a>
                     </div>
                 </div>
