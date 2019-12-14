@@ -166,7 +166,9 @@ class BrandController extends Controller
                 ->with('listProduct', $listProduct)
                 ->with('brand', $brand)
                 ->with('listCategory', $listCategory)
-                ->with('listBrand', $listBrand);
+                ->with('listBrand', $listBrand)
+                ->with('isShowSlider', false)
+                ->with('isShowSideBar', true);
         } else {
             return view('pages.client.NotFound');
         }

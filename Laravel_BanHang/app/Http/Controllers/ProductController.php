@@ -221,7 +221,9 @@ class ProductController extends Controller
             ->with('listCategory', $listCategory)
             ->with('listBrand', $listBrand)
             ->with('product', $product)
-            ->with('listProductRecommend', $arrProductRecommend);
+            ->with('listProductRecommend', $arrProductRecommend)
+            ->with('isShowSlider', false)
+            ->with('isShowSideBar', true);
     }
 
     public function getListRecommendProductByCategoryId($categoryId, $productId)

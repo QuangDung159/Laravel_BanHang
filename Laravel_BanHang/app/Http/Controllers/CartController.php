@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 
 class CartController extends Controller
 {
@@ -33,6 +34,17 @@ class CartController extends Controller
             return view(self::PATH_CLIENT . 'NotFound');
         }
 
+    }
 
+    public function showCartPage()
+    {
+        $listCategory = json_decode(Redis::get('list_category'));
+        $listBrand = json_decode(Redis::get('list_brand'));
+
+        return view(self::PATH_CLIENT . 'Cart')
+            ->with('listBrand', $listBrand)
+            ->with('listCategory', $listCategory)
+            ->with('isShowSlider', false)
+            ->with('isShowSideBar', false);
     }
 }
