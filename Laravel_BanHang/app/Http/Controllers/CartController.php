@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Redis;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use MongoDB\Driver\Session;
 
 class CartController extends Controller
 {
@@ -100,8 +101,19 @@ class CartController extends Controller
 
     public function showCheckOutPage()
     {
+        $total = 0;
+        $cart = Cart::content();
+        $url = '';
+        foreach ($cart as $item) {
+            $total += $item->price * $item->qty;
+            $url .= $item->id . '-' . $item->qty . '-';
+        }
+
         return view(self::PATH_CLIENT . '.CheckOut')
             ->with('isShowSideBar', false)
-            ->with('isShowSlider', false);
+            ->with('isShowSlider', false)
+            ->with('cart', $cart)
+            ->with('total', $total)
+            ->with('url', $url);
     }
 }

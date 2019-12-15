@@ -1,5 +1,12 @@
 @extends('layouts.Layout')
 @section('content')
+    <?php
+    if (Session::get('msg_check_out_success') != null) {
+        echo
+            '<div class="alert alert-success"><strong>' . Session::get('msg_check_out_success') . '</strong></div>';
+        Session::put('msg_check_out_success', null);
+    }
+    ?>
     <section id="cart_items">
         <div class="container">
             <div class="breadcrumbs">
@@ -75,13 +82,11 @@
                     <div class="total_area">
                         <div class="col-sm-6">
                             <ul>
-                                <li>Cart Sub Total <span>$59</span></li>
-                                <li>Eco Tax <span>$2</span></li>
+                                <li>Shipping Cost <span>Free</span></li>
                             </ul>
                         </div>
                         <div class="col-sm-6">
                             <ul>
-                                <li>Shipping Cost <span>Free</span></li>
                                 <li>Total <span>${{$total}}</span></li>
                             </ul>
                         </div>
