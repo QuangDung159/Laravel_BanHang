@@ -216,6 +216,7 @@ class ProductController extends Controller
         }
 
         $arrProductRecommend = array_chunk($arrProduct, 3);
+        $listComment = $this->getCommentByProductId($product->id);
 
         return view(self::PATH_CLIENT . 'ProductDetail')
             ->with('listCategory', $listCategory)
@@ -223,7 +224,9 @@ class ProductController extends Controller
             ->with('product', $product)
             ->with('listProductRecommend', $arrProductRecommend)
             ->with('isShowSlider', false)
-            ->with('isShowSideBar', true);
+            ->with('isShowSideBar', true)
+            ->with('listComment', $listComment)
+            ->with('numberOfComment', count($listComment));
     }
 
     public function getListRecommendProductByCategoryId($categoryId, $productId)
@@ -237,6 +240,40 @@ class ProductController extends Controller
             ->where(self::TABLE_NAME . '.id', '!=', $productId)
             ->limit(9)
             ->orderByDesc(self::TABLE_NAME . '.rate')
+            ->get();
+    }
+
+    public function submitComment(Request $req)
+    {
+        // validation
+
+        $productId = $req->product_id;
+        $content = $req->cmt_content;
+        $userId = Session::get('user_id');
+
+        $data = [];
+        $data['product_id'] = $productId;
+        $data['content'] = $content;
+        $data['user_id'] = $userId;
+        $data['created_at'] = time();
+
+        DB::table('comment')
+            ->insert($data);
+
+        return Redirect::to('/product/' . $productId);
+    }
+
+    public function getCommentByProductId($productId)
+    {
+        if (!$productId) {
+            return view(self::PATH_CLIENT . 'NotFound');
+        }
+
+        return DB::table(self::TABLE_NAME)
+            ->select(['comment.content', 'user.name', 'comment.created_at'])
+            ->join('comment', self::TABLE_NAME . '.id', '=', 'comment.product_id')
+            ->join('user', 'comment.user_id', '=', 'user.id')
+            ->where(self::TABLE_NAME . '.id', '=', $productId)
             ->get();
     }
 }
