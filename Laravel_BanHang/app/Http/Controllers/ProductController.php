@@ -207,8 +207,6 @@ class ProductController extends Controller
             return view(self::PATH_CLIENT . 'NotFound');
         }
 
-        echo $product->qty;die;
-
         $listProductRecommend = $this->getListRecommendProductByCategoryId($product->category_id, $id);
 
         $arrProduct = [];
