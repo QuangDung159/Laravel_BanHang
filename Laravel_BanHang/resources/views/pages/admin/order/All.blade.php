@@ -66,13 +66,13 @@
             </div>
             <footer class="panel-footer">
                 <div class="row">
-
                     <div class="col-sm-5 text-center">
                         <small
                             class="text-muted inline m-t-sm m-b-sm">
-                            Showing {{(($listOrder->currentPage() - 1) * 10) + 1}}
-                            - {{$listOrder->currentPage() * 10}}
-                            of {{$listOrder->total()}} items</small>
+                            Showing {{$listOrder->firstItem()}}
+                            - {{$listOrder->lastItem()}}
+                            of {{$listOrder->total()}} items
+                        </small>
                     </div>
                     <div class="col-sm-7 text-right text-center-xs">
                         @foreach ($listOrder as $key => $order)

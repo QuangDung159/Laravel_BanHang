@@ -29,7 +29,7 @@ class CategoryController extends Controller
     {
         $listCategory = DB::table('category')
             ->where('is_deleted', '=', 0)
-            ->get();
+            ->paginate(10);
         return view(self::PATH_TO_CATEGORY . 'AllCategory')->with('listCategory', $listCategory);
     }
 

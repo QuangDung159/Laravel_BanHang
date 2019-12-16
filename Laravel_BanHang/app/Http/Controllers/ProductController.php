@@ -38,12 +38,7 @@ class ProductController extends Controller
     public function doShowAllPage()
     {
         $listProduct = DB::table(self::TABLE_NAME)
-            ->join('category', self::TABLE_NAME . '.category_id', '=', 'category.id')
-            ->join('brand', self::TABLE_NAME . '.brand_id', '=', 'brand.id')
-            ->where(self::TABLE_NAME . '.is_deleted', '=', 0)
-            ->where('category.is_deleted', '=', 0)
-            ->where('brand.is_deleted', '=', 0)
-            ->get(
+            ->select(
                 [
                     self::TABLE_NAME . '.name',
                     self::TABLE_NAME . '.id',
@@ -57,7 +52,14 @@ class ProductController extends Controller
                     'category.name as category_name',
                     'brand.name as brand_name'
                 ]
-            );
+            )
+            ->join('category', self::TABLE_NAME . '.category_id', '=', 'category.id')
+            ->join('brand', self::TABLE_NAME . '.brand_id', '=', 'brand.id')
+            ->where(self::TABLE_NAME . '.is_deleted', '=', 0)
+            ->where('category.is_deleted', '=', 0)
+            ->where('brand.is_deleted', '=', 0)
+            ->paginate(10);
+
         return view(self::PATH . 'All')->with('listProduct', $listProduct);
     }
 
