@@ -34,6 +34,7 @@ Route::group(['middleware' => 'cache.client.data'], function () {
         Route::get('/cart', CART_CONTROLLER . 'showCartPage');
         Route::get('/checkout', CART_CONTROLLER . 'showCheckOutPage');
         Route::post('/doAddOrder', ORDER_CONTROLLER . 'doAddOrder');
+        Route::post('/submitComment', PRODUCT_CONTROLLER . 'submitComment');
     });
 
     Route::get('/login', USER_CONTROLLER . 'showLoginPage');
@@ -82,5 +83,10 @@ Route::group(['prefix' => '/admin'], function () {
         Route::post('/doEdit/{id}', PRODUCT_CONTROLLER . 'doEdit');
         Route::get('/edit/{id}', PRODUCT_CONTROLLER . 'showEditPage');
         Route::get('/delete/{id}', PRODUCT_CONTROLLER . 'doDelete');
+    });
+
+    // order
+    Route::group(['prefix' => '/order', 'middleware' => 'check.login'], function () {
+        Route::get('/all', ORDER_CONTROLLER . 'showAllOrderPage');
     });
 });

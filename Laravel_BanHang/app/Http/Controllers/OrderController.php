@@ -86,4 +86,33 @@ class OrderController extends Controller
                 ->update($data);
         }
     }
+
+    public function showAllOrderPage()
+    {
+        $listOrder = $this->getAllOrder();
+
+        return view('pages.admin.order.All')
+            ->with('listOrder', $listOrder);
+    }
+
+    public function getAllOrder()
+    {
+        return DB::table(self::TABLE_NAME)
+            ->select(
+                [
+                    'user.name as user_name',
+                    'product.name as product_name',
+                    'order_product.product_qty as order_product_qty',
+                    'product.id as product_id',
+                    'order.id as order_id',
+                    'user.email as user_email',
+                    'order.created_at',
+                    'order.updated_at',
+                ]
+            )
+            ->join('user', self::TABLE_NAME . '.user_id', '=', 'user.id')
+            ->join('order_product', self::TABLE_NAME . '.id', '=', 'order_product.order_id')
+            ->join('product', 'order_product.product_id', '=', 'product.id')
+            ->paginate(10);
+    }
 }

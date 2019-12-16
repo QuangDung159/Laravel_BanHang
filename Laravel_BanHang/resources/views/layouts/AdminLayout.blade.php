@@ -66,12 +66,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <img alt="" src="{{asset('admin/images/2.png')}}">
                         <span class="username">
                             <?php
-                                $adminName = Session::get('admin_name');
-                                if ($adminName != null) {
-                                    echo $adminName;
-                                } else {
-                                    echo 'John Doe';
-                                }
+                            $adminName = Session::get('admin_name');
+                            if ($adminName != null) {
+                                echo $adminName;
+                            } else {
+                                echo 'John Doe';
+                            }
                             ?>
                         </span>
                         <b class="caret"></b>
@@ -132,6 +132,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <ul class="sub">
                             <li><a href="{{URL::to('/admin/product/all')}}">All Product</a></li>
                             <li><a href="{{URL::to('/admin/product/add')}}">Add Product</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-copyright"></i>
+                            <span>Order</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="{{URL::to('/admin/order/all')}}">All Order</a></li>
                         </ul>
                     </li>
                 </ul>

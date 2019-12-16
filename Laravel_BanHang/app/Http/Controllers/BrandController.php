@@ -27,7 +27,7 @@ class BrandController extends Controller
     {
         $listBrand = DB::table(self::TABLE_NAME)
             ->where('is_deleted', '=', 0)
-            ->get();
+            ->paginate(10);
         return view(self::PATH . 'All')->with('listBrand', $listBrand);
     }
 

@@ -74,54 +74,51 @@
             <div class="col-sm-12">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#details" data-toggle="tab">Details</a></li>
-                    <li><a href="#reviews" data-toggle="tab">Reviews (5)</a></li>
+                    <li><a href="#reviews" data-toggle="tab">Reviews ({{$numberOfComment}})</a></li>
                 </ul>
             </div>
             <div class="tab-content">
                 <div class="tab-pane fade active in" id="details">
                     <div class="col-sm-11">
-                        <p>{!!$product->content!!}</p>
+                        @if ($product->content != '')
+                            <p>{!!$product->content!!}</p>
+                        @else
+                            <p>The content is being updated.</p>
+                        @endif
                     </div>
                 </div>
 
                 <div class="tab-pane fade" id="reviews">
                     <div class="col-sm-12">
-                        <ul>
-                            <li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
-                            <li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
-                            <li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li>
-                        </ul>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris
-                            nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate
-                            velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                        <hr/>
-
-                        <ul>
-                            <li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
-                            <li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
-                            <li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li>
-                        </ul>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris
-                            nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate
-                            velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                        <hr/>
+                        @foreach($listComment as $key => $comment)
+                            <ul>
+                                <li><a href=""><i class="fa fa-user"></i>{{$comment->name}}</a></li>
+                                <li><a href=""><i class="fa fa-clock-o"></i>{{date('H:i:s', $comment->created_at)}}</a>
+                                </li>
+                                <li><a href=""><i class="fa fa-calendar-o"></i>{{date('Y/m/d', $comment->created_at)}}
+                                    </a></li>
+                            </ul>
+                            <p>{{$comment->content}}</p>
+                            <hr/>
+                        @endforeach
 
                         <p><b>Write Your Review</b></p>
-                        <form action="#">
-										<span>
-											<input type="text" placeholder="Your Name"/>
-											<input type="email" placeholder="Email Address"/>
-										</span>
-                            <textarea name=""></textarea>
-                            <b>Rating: </b> <img src="images/product-details/rating.png" alt=""/>
-                            <button type="button" class="btn btn-default pull-right">
-                                Submit
-                            </button>
-                        </form>
+                        @if (Session::get('user_id') != '')
+                            <form action="{{URL::to('/submitComment')}}" method="post">
+                                {{csrf_field()}}
+                                <textarea name="cmt_content"></textarea>
+                                <input type="hidden" name="product_id" value="{{$product->id}}">
+                                <button type="submit" class="btn btn-default pull-right">
+                                    Submit
+                                </button>
+                            </form>
+                        @else
+                            <div class="panel panel-danger">
+                                <div class="panel-body">You must login to leave a comment. <a
+                                        href="{{URL::to('/login')}}">Login now.</a>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
 
