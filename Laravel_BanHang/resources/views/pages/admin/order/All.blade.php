@@ -75,8 +75,6 @@
                         </small>
                     </div>
                     <div class="col-sm-7 text-right text-center-xs">
-                        @foreach ($listOrder as $key => $order)
-                        @endforeach
                         {!! $listOrder->links() !!}
                     </div>
                 </div>

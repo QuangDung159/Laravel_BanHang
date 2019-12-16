@@ -47,6 +47,7 @@ class CategoryController extends Controller
         if (count($data) != 0) {
             DB::table('category')->insert($data);
             Session::put('msg_add_success', 'Add success');
+            Redis::del('list_category');
             return Redirect::to(self::URL_TO_CATEGORY . '/all');
         } else {
             return view('pages.admin.NotFound');
@@ -109,6 +110,7 @@ class CategoryController extends Controller
             if ($result) {
                 Session::put('msg_update_success', 'Update success');
             }
+            Redis::del('list_category');
             return Redirect::to(self::URL_TO_CATEGORY . '/all');
         } else {
             return view('pages.admin.NotFound');

@@ -3,7 +3,7 @@
     <?php
     if (Session::get('msg_add_success') != null) {
         echo
-            '<div class="alert alert-success"><strong>' . Session::get('msg_add_success') . '</strong></div>';
+            '<div class="alert alert-success"><strong>' . Session::get('msg_add_success') . '<a href="' . URL::to('/admin/category/add') . '">! Add more.</a></strong></div>';
         Session::put('msg_add_success', null);
     }
     ?>
@@ -130,8 +130,6 @@
                         </small>
                     </div>
                     <div class="col-sm-7 text-right text-center-xs">
-                        @foreach ($listCategory as $key => $category)
-                        @endforeach
                         {!! $listCategory->links() !!}
                     </div>
                 </div>

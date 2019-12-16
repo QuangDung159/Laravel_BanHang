@@ -27,8 +27,15 @@ class CacheClientDataMiddleware
         $listCategory = Redis::get('list_category');
         if (!$listCategory) {
             $listCategory = DB::table('category')
+                ->select(
+                    [
+                        'category.id',
+                        'category.name',
+                    ]
+                )
                 ->where('is_deleted', '=', 0)
-                ->where('status', '=', 1)->get();
+                ->where('status', '=', 1)
+                ->get();
 
             Redis::set('list_category', json_encode($listCategory));
         }
@@ -43,7 +50,7 @@ class CacheClientDataMiddleware
                     [
                         'brand.id',
                         'brand.name',
-                        DB::raw('COUNT(product.id) as number_product')
+                        DB::raw('COUNT(product.id) as number_product'),
                     ]
                 )
                 ->where('brand.is_deleted', '=', 0)
