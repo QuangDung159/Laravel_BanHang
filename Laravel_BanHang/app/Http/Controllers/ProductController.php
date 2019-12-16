@@ -88,6 +88,8 @@ class ProductController extends Controller
         if (count($data) != 0) {
             DB::table(self::TABLE_NAME)->insert($data);
             Session::put('msg_add_success', 'Add success');
+
+            Redis::del('list_brand');
             return Redirect::to(self::URL . '/all');
         } else {
             return view('pages.admin.NotFound');
