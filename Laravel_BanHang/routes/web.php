@@ -84,4 +84,9 @@ Route::group(['prefix' => '/admin'], function () {
         Route::get('/edit/{id}', PRODUCT_CONTROLLER . 'showEditPage');
         Route::get('/delete/{id}', PRODUCT_CONTROLLER . 'doDelete');
     });
+
+    // order
+    Route::group(['prefix' => '/order', 'middleware' => 'check.login'], function () {
+        Route::get('/all', ORDER_CONTROLLER . 'showAllOrderPage');
+    });
 });
