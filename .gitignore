@@ -22,3 +22,4 @@ Homestead.json
 .DS_Store
 /.idea/
 
+*.xml
